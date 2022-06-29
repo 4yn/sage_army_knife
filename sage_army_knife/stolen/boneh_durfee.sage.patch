@@ -1,0 +1,111 @@
+1c1,3
+< from __future__ import print_function
+---
+> # by mimoo from https://github.com/mimoo/RSA-and-LLL-attacks
+> 
+> # from __future__ import print_function
+12c14
+< debug = True
+---
+> # debug = True
+23c25
+< strict = False
+---
+> # strict = False
+32,33c34,35
+< helpful_only = True
+< dimension_min = 7 # stop removing if lattice reaches that dimension
+---
+> # helpful_only = True
+> # dimension_min = 7 # stop removing if lattice reaches that dimension
+62c64
+< def remove_unhelpful(BB, monomials, bound, current):
+---
+> def remove_unhelpful(BB, monomials, bound, current, debug=False, dimension_min=7):
+85c87,88
+<                 print("* removing unhelpful vector", ii)
+---
+>                 if debug:
+>                     print("* removing unhelpful vector", ii)
+89c92
+<                 BB = remove_unhelpful(BB, monomials, bound, ii-1)
+---
+>                 BB = remove_unhelpful(BB, monomials, bound, ii-1, debug, dimension_min)
+111c114
+<                     BB = remove_unhelpful(BB, monomials, bound, ii-1)
+---
+>                     BB = remove_unhelpful(BB, monomials, bound, ii-1, debug, dimension_min)
+122c125
+< def boneh_durfee(pol, modulus, mm, tt, XX, YY):
+---
+> def boneh_durfee(pol, modulus, mm, tt, XX, YY, debug=False, strict=False, helpful_only=True, dimension_min=7):
+180c183
+<         BB = remove_unhelpful(BB, monomials, modulus^mm, nn-1)
+---
+>         BB = remove_unhelpful(BB, monomials, modulus^mm, nn-1, debug, dimension_min)
+195,196d197
+<         print("We do not have det < bound. Solutions might not be found.")
+<         print("Try with highers m and t.")
+197a199,200
+>             print("We do not have det < bound. Solutions might not be found.")
+>             print("Try with highers m and t.")
+203c206,207
+<         print("det(L) < e^(m*n) (good! If a solution exists < N^delta, it will be found)")
+---
+>         if debug:
+>             print("det(L) < e^(m*n) (good! If a solution exists < N^delta, it will be found)")
+240c244,245
+<                 print("found them, using vectors", pol1_idx, "and", pol2_idx)
+---
+>                 if debug:
+>                     print("found them, using vectors", pol1_idx, "and", pol2_idx)
+266c271
+< def example():
+---
+> def boneh_durfee_attack(N, e, delta=0.18, m=4, debug=False, strict=False, helpful_only=True, dimension_min=7):
+276c281
+<     N = 0xc2fd2913bae61f845ac94e4ee1bb10d8531dda830d31bb221dac5f179a8f883f15046d7aa179aff848db2734b8f88cc73d09f35c445c74ee35b01a96eb7b0a6ad9cb9ccd6c02c3f8c55ecabb55501bb2c318a38cac2db69d510e152756054aaed064ac2a454e46d9b3b755b67b46906fbff8dd9aeca6755909333f5f81bf74db
+---
+>     # N = 0xc2fd2913bae61f845ac94e4ee1bb10d8531dda830d31bb221dac5f179a8f883f15046d7aa179aff848db2734b8f88cc73d09f35c445c74ee35b01a96eb7b0a6ad9cb9ccd6c02c3f8c55ecabb55501bb2c318a38cac2db69d510e152756054aaed064ac2a454e46d9b3b755b67b46906fbff8dd9aeca6755909333f5f81bf74db
+278c283
+<     e = 0x19441f679c9609f2484eb9b2658d7138252b847b2ed8ad182be7976ed57a3e441af14897ce041f3e07916445b88181c22f510150584eee4b0f776a5a487a4472a99f2ddc95efdd2b380ab4480533808b8c92e63ace57fb42bac8315fa487d03bec86d854314bc2ec4f99b192bb98710be151599d60f224114f6b33f47e357517
+---
+>     # e = 0x19441f679c9609f2484eb9b2658d7138252b847b2ed8ad182be7976ed57a3e441af14897ce041f3e07916445b88181c22f510150584eee4b0f776a5a487a4472a99f2ddc95efdd2b380ab4480533808b8c92e63ace57fb42bac8315fa487d03bec86d854314bc2ec4f99b192bb98710be151599d60f224114f6b33f47e357517
+281c286
+<     delta = .18 # this means that d < N^delta
+---
+>     # delta = .18 # this means that d < N^delta
+288c293
+<     m = 4 # size of the lattice (bigger the better/slower)
+---
+>     # m = 4 # size of the lattice (bigger the better/slower)
+322c327,330
+<     solx, soly = boneh_durfee(pol, e, m, t, X, Y)
+---
+>     solx, soly = boneh_durfee(pol, e, m, t, X, Y, debug=debug, strict=strict, helpful_only=helpful_only, dimension_min=dimension_min)
+> 
+>     if debug:
+>         print(("=== %s seconds ===" % (time.time() - start_time)))
+326,327c334,335
+<         print("=== solution found ===")
+<         if False:
+---
+>         if debug:
+>             print("=== solution found ===")
+332c340,342
+<         print("private key found:", d)
+---
+>         if debug:
+>             print("private key found:", d)
+>         return d
+334a345
+>         return None
+336,337d346
+<     if debug:
+<         print(("=== %s seconds ===" % (time.time() - start_time)))
+339,340c348,349
+< if __name__ == "__main__":
+<     example()
+---
+> # if __name__ == "__main__":
+> #     example()

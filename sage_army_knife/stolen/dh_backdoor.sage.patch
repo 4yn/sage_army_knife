@@ -1,0 +1,132 @@
+0a1,2
+> # by mimoo from https://github.com/mimoo/Diffie-Hellman_Backdoor
+> 
+10c12
+< import sys, pdb, time
+---
+> # import sys, pdb, time
+56c58
+< def CM_HDSS(modulus_size, subgroup_size):
+---
+> def CM_HDSS(modulus_size, subgroup_size, debug=False):
+74,78c76,81
+<     print "modulus          =", n
+<     print "bitlength        =", len(bin(n)) - 2
+<     print "p, q             =", p, ", ", q
+<     print "generator        =", g
+<     print "order_p, order_q =", p_order, ", ", q_order
+---
+>     if debug:
+>         print("modulus          =", n)
+>         print("bitlength        =", len(bin(n)) - 2)
+>         print("p, q             =", p, ", ", q)
+>         print("generator        =", g)
+>         print("order_p, order_q =", p_order, ", ", q_order)
+125c128
+< def CM_HSO(modulus_size, small_factors_size, big_factor_size, generator=0):
+---
+> def CM_HSO(modulus_size, small_factors_size, big_factor_size, generator=0, debug=False):
+173,180c176,184
+<     print "modulus          =", modulus
+<     print "bitlength        =", len(bin(modulus)) - 2
+<     print "p, q             =", p, ",", q
+<     print "p_order          =", p_order
+<     print "q_order          =", q_order
+<     print "p_factors        =", p_factors
+<     print "q_factors        =", q_factors
+<     print "generator        =", g
+---
+>     if debug:
+>         print("modulus          =", modulus)
+>         print("bitlength        =", len(bin(modulus)) - 2)
+>         print("p, q             =", p, ",", q)
+>         print("p_order          =", p_order)
+>         print("q_order          =", q_order)
+>         print("p_factors        =", p_factors)
+>         print("q_factors        =", q_factors)
+>         print("generator        =", g)
+186c190
+< def CM_HSO_HSS(modulus_size, small_factors_size, big_factor_size):
+---
+> def CM_HSO_HSS(modulus_size, small_factors_size, big_factor_size, debug=False):
+236,243c240,248
+<     print "modulus          =", modulus
+<     print "bitlength        =", len(bin(modulus)) - 2
+<     print "p, q             =", p, ",", q
+<     print "p_order          =", p_order
+<     print "q_order          =", q_order
+<     print "p_factors        =", p_factors
+<     print "q_factors        =", q_factors
+<     print "generator        =", g
+---
+>     if debug:
+>         print("modulus          =", modulus)
+>         print("bitlength        =", len(bin(modulus)) - 2)
+>         print("p, q             =", p, ",", q)
+>         print("p_order          =", p_order)
+>         print("q_order          =", q_order)
+>         print("p_factors        =", p_factors)
+>         print("q_factors        =", q_factors)
+>         print("generator        =", g)
+253,282c258,287
+< menu = [
+<     "composite modulus with hidden small subgroup (CM-HSS)",
+<     "composite modulus with B-smooth order (CM-HSO)"
+<         ]
+< 
+< def main():
+<     # display menu if not provided with an option
+<     if len(sys.argv) < 2:
+<         sys.stderr.write("\x1b[2J\x1b[H")
+<         print cc.HEADER + "# Choose a method from:" + cc.END
+<         for index, item in enumerate(menu, 1):
+<             print "%d. %s" % (index, menu[index - 1])
+<         print "(you can also pass that choice as an argument)"
+<         # prompt
+<         choice = int(raw_input(cc.OKGREEN + "# Enter a digit:\n" + cc.END))
+<         sys.stderr.write("\x1b[2J\x1b[H")
+<     else:
+<         choice = int(sys.argv[1])
+< 
+<     # run method
+<     if choice == 1:
+<         g, n, p, q, p_order, q_order = CM_HSS(1024, 30)
+<     elif choice == 2:
+<         g, n, p, q, factors = CM_HSO(1024, 20, 40, 2)
+< 
+< if __name__ == "__main__":
+<     main()
+< else:
+<     #g, n, p, q, factors = CM_HSO(1024, 20, 40, 2)
+<     g, n, p, q, factors = test(1024, 20, 40)
+---
+> # menu = [
+> #     "composite modulus with hidden small subgroup (CM-HSS)",
+> #     "composite modulus with B-smooth order (CM-HSO)"
+> #         ]
+> 
+> # def main():
+> #     # display menu if not provided with an option
+> #     if len(sys.argv) < 2:
+> #         sys.stderr.write("\x1b[2J\x1b[H")
+> #         print(cc.HEADER + "# Choose a method from:" + cc.END)
+> #         for index, item in enumerate(menu, 1):
+> #             print("%d. %s" % (index, menu[index - 1]))
+> #         print("(you can also pass that choice as an argument)")
+> #         # prompt
+> #         choice = int(raw_input(cc.OKGREEN + "# Enter a digit:\n" + cc.END))
+> #         sys.stderr.write("\x1b[2J\x1b[H")
+> #     else:
+> #         choice = int(sys.argv[1])
+> 
+> #     # run method
+> #     if choice == 1:
+> #         g, n, p, q, p_order, q_order = CM_HSS(1024, 30)
+> #     elif choice == 2:
+> #         g, n, p, q, factors = CM_HSO(1024, 20, 40, 2)
+> 
+> # if __name__ == "__main__":
+> #     main()
+> # else:
+> #     #g, n, p, q, factors = CM_HSO(1024, 20, 40, 2)
+> #     g, n, p, q, factors = test(1024, 20, 40)

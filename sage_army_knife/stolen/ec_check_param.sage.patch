@@ -1,0 +1,7 @@
+0a1,2
+> # by pqlx from https://gist.github.com/pqlx/d0bdf2d0c4a2aa400b2b52d9bd9b7b65
+> 
+65c67
+< def check(curve, generator=None):
+---
+> def check_curve(curve, generator=None):
