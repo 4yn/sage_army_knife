@@ -1,0 +1,30 @@
+11c11
+< import logging
+---
+> # import logging
+13,15c13,15
+< logging.basicConfig(format='STT> %(message)s')
+< logger = logging.getLogger()
+< logger.setLevel(logging.DEBUG)
+---
+> # logging.basicConfig(format='STT> %(message)s')
+> # logger = logging.getLogger()
+> # logger.setLevel(logging.DEBUG)
+100c100,101
+<         logger.debug('Solving...')
+---
+>         # logger.debug('Solving...')
+>         print("Solving...")
+102c103
+<         self.solver.check()
+---
+>         print(self.solver.check())
+105c106,107
+<         logger.debug(f'Solved! (in {round(end-start,3)}s)')
+---
+>         # logger.debug(f'Solved! (in {round(end-start,3)}s)')
+>         print(f'Solved! (in {round(end-start,3)}s)')
+131c133
+<     logger.debug('Test passed!')
+---
+>     # logger.debug('Test passed!')

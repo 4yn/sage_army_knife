@@ -1,0 +1,64 @@
+80,84c80,84
+<     print "modulus          =", n
+<     print "bitlength        =", len(bin(n)) - 2
+<     print "p, q             =", p, ", ", q
+<     print "generator        =", g
+<     print "order_p, order_q =", p_order, ", ", q_order
+---
+>     print("modulus          =", n)
+>     print("bitlength        =", len(bin(n)) - 2)
+>     print("p, q             =", p, ", ", q)
+>     print("generator        =", g)
+>     print("order_p, order_q =", p_order, ", ", q_order)
+179,186c179,186
+<     print "modulus          =", modulus
+<     print "bitlength        =", len(bin(modulus)) - 2
+<     print "p, q             =", p, ",", q
+<     print "p_order          =", p_order
+<     print "q_order          =", q_order
+<     print "p_factors        =", p_factors
+<     print "q_factors        =", q_factors
+<     print "generator        =", g
+---
+>     print("modulus          =", modulus)
+>     print("bitlength        =", len(bin(modulus)) - 2)
+>     print("p, q             =", p, ",", q)
+>     print("p_order          =", p_order)
+>     print("q_order          =", q_order)
+>     print("p_factors        =", p_factors)
+>     print("q_factors        =", q_factors)
+>     print("generator        =", g)
+242,249c242,249
+<     print "modulus          =", modulus
+<     print "bitlength        =", len(bin(modulus)) - 2
+<     print "p, q             =", p, ",", q
+<     print "p_order          =", p_order
+<     print "q_order          =", q_order
+<     print "p_factors        =", p_factors
+<     print "q_factors        =", q_factors
+<     print "generator        =", g
+---
+>     print("modulus          =", modulus)
+>     print("bitlength        =", len(bin(modulus)) - 2)
+>     print("p, q             =", p, ",", q)
+>     print("p_order          =", p_order)
+>     print("q_order          =", q_order)
+>     print("p_factors        =", p_factors)
+>     print("q_factors        =", q_factors)
+>     print("generator        =", g)
+268c268
+<         print cc.HEADER + "# Choose a method from:" + cc.END
+---
+>         print(cc.HEADER + "# Choose a method from:" + cc.END)
+270,271c270,271
+<             print "%d. %s" % (index, menu[index - 1])
+<         print "(you can also pass that choice as an argument)"
+---
+>             print("%d. %s" % (index, menu[index - 1]))
+>         print("(you can also pass that choice as an argument)")
+288,289c288,289
+<     g, n, p, q, factors = test(1024, 20, 40)
+< 
+---
+>     # g, n, p, q, factors = test(1024, 20, 40)
+>     pass
