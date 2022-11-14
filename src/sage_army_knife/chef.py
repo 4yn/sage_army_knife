@@ -17,6 +17,54 @@ except ImportError:
 class ChefKnife:
     """
     Polyglot data container for casting between data encodings
+
+    Has functions for casting to and from `str`, `bytes`, `b64`, `json`, `hex`,
+    `int`, `io.BytesIO` and`io.StringIO`. Can also calculate hashes, xor and
+    basic AES calculations.
+
+    The aliases `CK` or `Chef` can also be used.
+
+    The conversion functions try to follow this naming convention:
+
+    - `to_*` encodes a `ChefKnife(data)` to `ChefKnife(encoded data)`
+    - `from_*` parses a `ChefKnife(encoded data)` to `ChefKnife(data)`
+    - `init_*` takes in a non-`ChefKnife` object, decodes the data and
+        returns a `ChefKnife(data)`
+    - `into_*` turns a `ChefKnife(data)` into a non-`ChefKnife` object
+
+    The conversion functions can also be chained together.
+
+    Example usage:
+    ```python
+    >>> from sage_army_knife import ChefKnife
+    >>> # from sage_army_knife import CK, Chef
+    >>> ChefKnife("abcd").to_b64()
+    ChefKnife(b'YWJjZA==')
+    >>> ChefKnife("abcd").to_b64().to_hex()
+    ChefKnife('59574a6a5a413d3d')
+    >>> ChefKnife("abcd").to_b64().to_hex().to_hexdigest("md5")
+    ChefKnife('58a15dd16f7d263689469ea66b4e57d9')
+    >>> ChefKnife("abcd").to_b64().to_hex().to_hexdigest("md5").into_str()
+    '58a15dd16f7d263689469ea66b4e57d9'
+    >>> ChefKnife("abcd") ^ "bcde"
+    ChefKnife(b'\x03\x01\x07\x01')
+    >>> ck = ChefKnife("abcd")
+    >>> ck
+    ChefKnife('abcd')
+    >>> ck += "efg"
+    >>> ck
+    ChefKnife('abcdefg')
+    >>> ck += b"hij"
+    >>> ck
+    ChefKnife(b'abcdefghij')
+    >>> ck += ChefKnife("bG1u").from_b64()
+    >>> ck
+    ChefKnife(b'abcdefghijlmn')
+    >>> ck[1::2]
+    Chef(b'bdfhjm')
+    >>> ck.pad_pcks7()
+    ChefKnife(b'abcdefghijlmn\x03\x03\x03')
+    ```
     """
 
     """
@@ -87,6 +135,9 @@ class ChefKnife:
         """
         return self.to_bytes().get()
 
+    def __bytes__(self) -> bytes:
+        return self.into_bytes()
+
     def to_str(self) -> Self:
         """
         ChefKnife(?) => ChefKnife(str)
@@ -105,6 +156,31 @@ class ChefKnife:
         ChefKnife(?) => str
         """
         return self.to_str().get()
+
+    def __str__(self) -> str:
+        return self.into_str()
+
+    def __add__(self, other) -> Self:
+        data = self.get()
+        if isinstance(data, str) and isinstance(other, str):
+            data = data + other
+        elif isinstance(other, (str, bytes, ChefKnife)):
+            data = self.into_bytes()
+            data = data + self.__class__(other).into_bytes()
+        else:
+            raise TypeError(f"Cannot add {type(other)} to ChefKnife({type(data)})")
+        return self.update(data)
+
+    def __radd__(self, other) -> Self:
+        data = self.get()
+        if isinstance(data, str) and isinstance(other, str):
+            data = other + data
+        elif isinstance(other, (str, bytes, ChefKnife)):
+            data = self.into_bytes()
+            data = self.__class__(other).into_bytes() + data
+        else:
+            raise TypeError(f"Cannot add ChefKnife({type(data)}) to {type(other)}")
+        return self.update(data)
 
     """
     Encodings
@@ -211,6 +287,9 @@ class ChefKnife:
         ChefKnife(?) => int
         """
         return int(self.into_hex(), 16)
+
+    def __int__(self) -> int:
+        return self.into_int()
 
     """
     File IO
@@ -363,6 +442,12 @@ class ChefKnife:
             ])
         
         return self.update(data)
+
+    def __xor__(self, other):
+        return self.bxor(other)
+    
+    def __rxor__(self, other):
+        return self.bxor(other)
 
     def badd(self, *keys, cycle=False) -> Self:
         """

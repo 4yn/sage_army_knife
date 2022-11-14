@@ -64,7 +64,7 @@ def test_ck_bytes_manip():
     with pytest.raises(ValueError) as e:
         ChefKnife(b"abcd").unpad_pcks7()
 
-    # TODO: xor, add, sub
+    # TODO: add, xor, add, sub
 
 def test_ck_hashing():
     bytes_ck = ChefKnife(b"abcd")
