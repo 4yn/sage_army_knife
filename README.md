@@ -6,27 +6,36 @@ A mutitool for cryptography CTF problems
 
 First install `sage` with `conda`.
 
-```
+```bash
 pip install git+https://github.com/4yn/sage_army_knife.git@main
 ```
 
 ## Script Bag
 
-```
+```python
 from sage_army_knife import *
 ```
 
+Many of these functions aren't my own, credits to the original authors where due.
+
 - Data manipulation: `ChefKnife`
-- RSA: `RSAKnife`, [`boneh_durfee`](https://github.com/mimoo/RSA-and-LLL-attacks)
-- DH: [`b_smooth_prime`](https://github.com/mimoo/Diffie-Hellman_Backdoor)
-- PRNG: [`Untwister`](https://github.com/icemonster/symbolic_mersenne_cracker), [`get_seed_for_random_state`](https://imp.ress.me/blog/2022-11-13/seccon-ctf-2022#janken-vs-kurenaif)
-- ECC: `two_points_to_a4_a6`, `is_curve_singular`, `solve_singular_node`, `solve_singular_cusp`, [`check_ecc_curve`](https://gist.github.com/pqlx/d0bdf2d0c4a2aa400b2b52d9bd9b7b65)
-- Lattices: [`closest_vector`](https://github.com/hyunsikjeong/LLL), [`inequality_closest_vector`](https://github.com/rkm0959/Inequality_Solving_with_CVP)
-- Polynomials: [`small_roots`](https://github.com/defund/coppersmith)
+- RSA: `RSAKnife`, [`boneh_durfee`](https://github.com/mimoo/RSA-and-LLL-attacks) by [@mimoo](https://github.com/mimoo)
+- DH: [`b_smooth_prime`](https://github.com/mimoo/Diffie-Hellman_Backdoor) by [@mimoo](https://github.com/mimoo)
+- PRNG: [`Untwister`](https://github.com/icemonster/symbolic_mersenne_cracker) by [@icemonster](https://github.com/icemonster), [`get_seed_for_random_state`](https://imp.ress.me/blog/2022-11-13/seccon-ctf-2022#janken-vs-kurenaif)
+- ECC: `two_points_to_a4_a6`, `is_curve_singular`, `solve_singular_node`, `solve_singular_cusp`, [`check_ecc_curve`](https://gist.github.com/pqlx/d0bdf2d0c4a2aa400b2b52d9bd9b7b65) by [@pqlx](https://github.com/pqlx)
+- Lattices: [`closest_vector`](https://github.com/hyunsikjeong/LLL) by [@rbtree](https://github.com/hyunsikjeong), [`inequality_closest_vector`](https://github.com/rkm0959/Inequality_Solving_with_CVP) by [@rkm0959](https://github.com/rkm0959)
+- Polynomials: [`small_roots`](https://github.com/defund/coppersmith) by [@defund](https://github.com/defund)
+
+Other CTF crypto code libraries worth looking at:
+
+- [@p4-team/crypto-commons](https://github.com/p4-team/crypto-commons)
+- [@ValarDragon/CTF-Crypto](https://github.com/ValarDragon/CTF-Crypto)
+- [@rkm0959/Cryptography_Writeups](https://github.com/rkm0959/Cryptography_Writeups)
+- [@josephsurin/lattice-based-cryptanalysis](https://github.com/josephsurin/lattice-based-cryptanalysis)
 
 ## ChefKnife
 
-```
+```python
 from sage_army_knife import ChefKnife
 from sage_army_knife import Chef
 from sage_army_knife import CK
