@@ -19,7 +19,7 @@ class ChefKnife:
     Polyglot data container for casting between data encodings
 
     Has functions for casting to and from `str`, `bytes`, `b64`, `json`, `hex`,
-    `int`, `io.BytesIO` and`io.StringIO`. Can also calculate hashes, xor and
+    `int`, `io.BytesIO` and `io.StringIO`. Can also calculate hashes, xor and
     basic AES calculations.
 
     The aliases `CK` or `Chef` can also be used.
