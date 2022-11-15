@@ -4,9 +4,11 @@ A mutitool for cryptography CTF problems
 
 ## Install
 
-First install `sage` with `conda`.
+Install `sage` (>9) from other means, then install package via git URL.
 
 ```bash
+# seutp conda env?
+conda install sage
 pip install git+https://github.com/4yn/sage_army_knife.git@main
 ```
 
@@ -41,7 +43,9 @@ from sage_army_knife import Chef
 from sage_army_knife import CK
 ```
 
-Polyglot data container for casting between data encodings
+Polyglot data container for casting between data encodings, inspired by
+[CyberChef](https://gchq.github.io/CyberChef/) and
+[@securisec/chepy](https://github.com/securisec/chepy).
 
 Has functions for casting to and from `str`, `bytes`, `b64`, `json`, `hex`,
 `int`, `io.BytesIO` and `io.StringIO`. Can also calculate hashes, xor and

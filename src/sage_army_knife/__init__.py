@@ -1,3 +1,14 @@
+from sagemath.check_version import check_version
+
+try:
+    check_version(">9")
+except ValueError as e:
+    import_error_message = str(e)
+    if "Sage does not seem to be installed" in import_error_message:
+        raise ImportError("Sage not installed. Please `conda install sage`.")
+    elif "is older than the required one" in import_error_message:
+        raise ImportError("Sage is too old. Please update.")
+
 from .chef import ChefKnife, Chef, CK
 from .untwister import Untwister, get_seed_for_random_state
 

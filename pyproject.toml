@@ -1,32 +1,22 @@
 [build-system]
-requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_meta"
+requires = [ "poetry-core>=1.0.0" ]
+build-backend = "poetry.core.masonry.api"
 
-[project]
+[tool.poetry]
 name = "sage_army_knife"
 version = "0.1.0"
-authors = [
-  { name="4yn", email="add@ress.me" },
-]
 description = "A mutitool for cryptography CTF problems"
-readme = "README.md"
-license = { file="LICENSE" }
-requires-python = ">=3.7"
-classifiers = [
-    "Programming Language :: Python :: 3",
-    "Operating System :: OS Independent",
-]
-dependencies = [
-    "typing-extensions",
-    "pycryptodome",
-    "z3-solver",
-    "sagemath",
-    "pytest"
-]
+authors = [ "4yn <add@ress.me>" ]
 
-[project.urls]
-"Homepage" = "https://github.com/4yn/sage_army_knife"
-"Bug Tracker" = "https://github.com/4yn/sage_army_knife/issues"
+[tool.poetry.dependencies]
+typing-extensions = { version = "^4" }
+pycryptodome = { version = "^3" }
+z3-solver = { version = "^4" }
+sagemath = { version = "^1" }
+pytest = { version = "^7", optional = true }
+
+[tool.poetry.extras]
+test = [ "pytest" ]
 
 [tool.pytest.ini_options]
 pythonpath = [
