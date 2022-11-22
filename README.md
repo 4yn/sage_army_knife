@@ -6,6 +6,8 @@ A mutitool for cryptography CTF problems
 
 Install `sage` (>9) from other means, then install package via git URL.
 
+Some modules may still work without `sage` installed.
+
 ```bash
 # seutp conda env?
 conda install sage

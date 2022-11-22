@@ -12,7 +12,6 @@ authors = [ "4yn <add@ress.me>" ]
 typing-extensions = { version = "^4" }
 pycryptodome = { version = "^3" }
 z3-solver = { version = "^4" }
-sagemath = { version = "^1" }
 pytest = { version = "^7", optional = true }
 
 [tool.poetry.extras]
