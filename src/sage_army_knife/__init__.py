@@ -12,6 +12,7 @@ except ImportError:
 
 if _sage_found:
     from .dot_sage.rsa import RSAKnife
+    from .dot_sage.cvp import CVPKnife
     from .dot_sage.curve import two_points_to_a4_a6, is_curve_singular, solve_singular_node, solve_singular_cusp
     from .dot_sage.matrix import expand_matrix
 
