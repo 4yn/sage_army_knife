@@ -160,9 +160,10 @@ class CVPKnife:
             self.cv.append(raw_cv_i // scale)
         
         # bounds check
-        for idx, (cv_i, (lb, ub)) in enumerate(zip(self.cv, self.wip_vector)):
-            if not (lb <= cv_i <= ub):
-                print(f"Warning: expression {idx} solution was out of bounds")
+        if self.show:
+            for idx, (cv_i, (lb, ub)) in enumerate(zip(self.cv, self.wip_vector)):
+                if not (lb <= cv_i <= ub):
+                    print(f"Warning: expression {idx} solution was out of bounds")
         
         # return traced
         if fmt == "list":
